@@ -1,0 +1,18 @@
+{
+    "name": "Spotifys Dev Container",
+    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter"
+    ],
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteEnv": {
+        "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
+        "SPOTIPY_CLIENT_SECRET": "${localEnv:SPOTIPY_CLIENT_SECRET}",
+        "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
+    }
+}

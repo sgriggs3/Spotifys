@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Spotify Script",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Spotify.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Debug Spotify Script",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Spotify.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "stopOnEntry": false,
+            "showReturnValue": true
+        }
+    ]
+}
