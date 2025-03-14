@@ -12,7 +12,6 @@
     "postCreateCommand": "pip install -r requirements.txt",
     "remoteEnv": {
         "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
-        "SPOTIPY_CLIENT_SECRET": "${localEnv:SPOTIPY_CLIENT_SECRET}",
         "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
     }
 }
