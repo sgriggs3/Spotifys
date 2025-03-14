@@ -34,8 +34,10 @@ def kill_port(port):
             pass
     else:
         try:
-            subprocess.run(['lsof', '-ti', f':{port}', '-sTCP:LISTEN', '-t'], check=True)
-            subprocess.run(['kill', '-9', f'$(lsof -ti:{port})'], shell=True)
+            result = subprocess.run(['lsof', '-ti', f':{port}', '-sTCP:LISTEN', '-t'], capture_output=True, text=True, check=True)
+            pids = result.stdout.strip().split()
+            for pid in pids:
+                subprocess.run(['kill', '-9', pid], check=True)
         except subprocess.CalledProcessError:
             pass
 
