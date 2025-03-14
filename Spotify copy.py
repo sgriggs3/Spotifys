@@ -29,7 +29,7 @@ file_paths = ['cleaned_spotify_history.csv']
 def kill_port(port):
     """Kill process using the specified port"""
     if platform.system() == "Windows":
-        command = ['netstat', '-ano', '|', 'findstr', f':{port}']
+        command = f'netstat -ano | findstr :{port}'
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         if stdout:
