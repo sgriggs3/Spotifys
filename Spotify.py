@@ -51,14 +51,18 @@ def authenticate_spotify():
     redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
 
     # Ensure necessary environment variables are set
-    if not client_id or not client_secret or not redirect_uri:
+    if not all([client_id, client_secret, redirect_uri]):
         raise ValueError(
             "SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET and SPOTIPY_REDIRECT_URI environment variables must be set.")
 
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
-                                                   client_secret=client_secret,
-                                                   redirect_uri=redirect_uri,
-                                                   scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative"))
+    auth_manager = SpotifyOAuth(
+        client_id=client_id,
+        client_secret=client_secret,
+        redirect_uri=redirect_uri,
+        scope="user-read-email user-read-private user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative"
+    )
+
+    sp = spotipy.Spotify(auth_manager=auth_manager)
     return sp
 
 # --- Load CSV files ---
@@ -174,7 +178,7 @@ if __name__ == "__main__":
             key, value = line.strip().split("=", 1)
             os.environ[key] = value
 
-    #sp = authenticate_spotify()
+    sp = authenticate_spotify()
     dataframes = load_csv_files(file_paths)
-    #process_csv_files(sp, dataframes)
+    process_csv_files(sp, dataframes)
     merge_processed_files()
