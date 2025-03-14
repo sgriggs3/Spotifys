@@ -1,0 +1,240 @@
+2025-03-14 01:07:59,111 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:08:01,256 - INFO - Opened https://accounts.spotify.com/authorize?client_id=dcc2df507bde447c93a0199358ca219d&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A9090%2Fcallback&scope=user-read-recently-played in your browser
+2025-03-14 01:13:03,322 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:03,323 - ERROR - Unexpected error (batch 0, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:13:08,328 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:08,329 - ERROR - Unexpected error (batch 0, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:13:13,334 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:13,334 - ERROR - Unexpected error (batch 0, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:13:18,340 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:18,340 - ERROR - Unexpected error (batch 50, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:13:23,346 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:23,346 - ERROR - Unexpected error (batch 50, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:13:28,352 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:28,352 - ERROR - Unexpected error (batch 50, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:13:33,358 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:33,358 - ERROR - Unexpected error (batch 100, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:13:38,363 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:38,364 - ERROR - Unexpected error (batch 100, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:13:43,369 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:43,370 - ERROR - Unexpected error (batch 100, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:13:48,370 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:48,371 - ERROR - Unexpected error (batch 150, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:13:53,376 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:53,376 - ERROR - Unexpected error (batch 150, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:13:58,381 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:13:58,382 - ERROR - Unexpected error (batch 150, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:14:03,383 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:03,384 - ERROR - Unexpected error (batch 200, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:14:08,389 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:08,389 - ERROR - Unexpected error (batch 200, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:14:13,395 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:13,395 - ERROR - Unexpected error (batch 200, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:14:18,401 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:18,401 - ERROR - Unexpected error (batch 250, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:14:23,407 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:23,407 - ERROR - Unexpected error (batch 250, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:14:28,413 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:28,413 - ERROR - Unexpected error (batch 250, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:14:33,418 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:33,419 - ERROR - Unexpected error (batch 300, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:14:38,424 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:38,425 - ERROR - Unexpected error (batch 300, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:14:43,430 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:43,430 - ERROR - Unexpected error (batch 300, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:14:48,436 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:48,436 - ERROR - Unexpected error (batch 350, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:14:53,440 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:53,440 - ERROR - Unexpected error (batch 350, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:14:58,446 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:14:58,446 - ERROR - Unexpected error (batch 350, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:15:03,452 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:03,452 - ERROR - Unexpected error (batch 400, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:15:08,457 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:08,458 - ERROR - Unexpected error (batch 400, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:15:13,462 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:13,463 - ERROR - Unexpected error (batch 400, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:15:15,401 - INFO - Merged dataset saved to processed_data/spotify_history_combined.csv
+2025-03-14 01:15:18,463 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:18,464 - ERROR - Unexpected error (batch 450, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:15:23,466 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:23,467 - ERROR - Unexpected error (batch 450, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:15:28,472 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:28,472 - ERROR - Unexpected error (batch 450, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:15:33,478 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:33,479 - ERROR - Unexpected error (batch 500, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:15:38,484 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:38,484 - ERROR - Unexpected error (batch 500, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:15:43,489 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:43,490 - ERROR - Unexpected error (batch 500, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:15:48,495 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:48,495 - ERROR - Unexpected error (batch 550, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:15:53,501 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:53,501 - ERROR - Unexpected error (batch 550, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:15:58,504 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:15:58,504 - ERROR - Unexpected error (batch 550, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:16:03,510 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:03,510 - ERROR - Unexpected error (batch 600, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:16:08,515 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:08,516 - ERROR - Unexpected error (batch 600, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:16:13,521 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:13,522 - ERROR - Unexpected error (batch 600, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:16:18,526 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:18,526 - ERROR - Unexpected error (batch 650, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:16:23,532 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:23,532 - ERROR - Unexpected error (batch 650, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:16:28,538 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:28,538 - ERROR - Unexpected error (batch 650, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:16:33,540 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:33,541 - ERROR - Unexpected error (batch 700, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:16:38,546 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:38,547 - ERROR - Unexpected error (batch 700, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:16:43,552 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:43,552 - ERROR - Unexpected error (batch 700, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:16:48,558 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:48,558 - ERROR - Unexpected error (batch 750, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:16:53,564 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:53,564 - ERROR - Unexpected error (batch 750, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:16:58,569 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:16:58,570 - ERROR - Unexpected error (batch 750, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:17:03,573 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:03,574 - ERROR - Unexpected error (batch 800, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:17:08,579 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:08,580 - ERROR - Unexpected error (batch 800, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:17:13,585 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:13,586 - ERROR - Unexpected error (batch 800, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:17:18,591 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:18,591 - ERROR - Unexpected error (batch 850, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:17:23,597 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:23,597 - ERROR - Unexpected error (batch 850, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:17:28,603 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:28,603 - ERROR - Unexpected error (batch 850, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:17:33,608 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:33,609 - ERROR - Unexpected error (batch 900, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:17:38,614 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:38,615 - ERROR - Unexpected error (batch 900, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:17:43,620 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:43,620 - ERROR - Unexpected error (batch 900, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:17:48,626 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:48,626 - ERROR - Unexpected error (batch 950, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:17:53,632 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:53,632 - ERROR - Unexpected error (batch 950, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:17:58,637 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:17:58,638 - ERROR - Unexpected error (batch 950, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:18:03,643 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:03,644 - ERROR - Unexpected error (batch 1000, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:18:08,649 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:08,649 - ERROR - Unexpected error (batch 1000, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:18:13,655 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:13,655 - ERROR - Unexpected error (batch 1000, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:18:18,659 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:18,659 - ERROR - Unexpected error (batch 1050, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:18:23,664 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:23,665 - ERROR - Unexpected error (batch 1050, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:18:28,670 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:28,671 - ERROR - Unexpected error (batch 1050, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:18:33,676 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:33,676 - ERROR - Unexpected error (batch 1100, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:18:34,504 - INFO - Merged dataset saved to processed_data/spotify_history_combined.csv
+2025-03-14 01:18:38,682 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:38,682 - ERROR - Unexpected error (batch 1100, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:18:43,688 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:43,688 - ERROR - Unexpected error (batch 1100, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:18:48,690 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:48,690 - ERROR - Unexpected error (batch 1150, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:18:53,696 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:53,696 - ERROR - Unexpected error (batch 1150, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:18:58,702 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:18:58,702 - ERROR - Unexpected error (batch 1150, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:19:03,703 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:03,704 - ERROR - Unexpected error (batch 1200, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:19:08,708 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:08,709 - ERROR - Unexpected error (batch 1200, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:19:13,713 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:13,714 - ERROR - Unexpected error (batch 1200, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:19:18,719 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:18,720 - ERROR - Unexpected error (batch 1250, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:19:23,725 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:23,726 - ERROR - Unexpected error (batch 1250, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:19:28,731 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:28,731 - ERROR - Unexpected error (batch 1250, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:19:33,737 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:33,737 - ERROR - Unexpected error (batch 1300, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:19:38,743 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:38,743 - ERROR - Unexpected error (batch 1300, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:19:43,749 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:43,749 - ERROR - Unexpected error (batch 1300, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:19:48,754 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:48,755 - ERROR - Unexpected error (batch 1350, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:19:53,759 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:53,760 - ERROR - Unexpected error (batch 1350, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:19:58,765 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:19:58,765 - ERROR - Unexpected error (batch 1350, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:20:03,768 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:03,768 - ERROR - Unexpected error (batch 1400, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:20:08,774 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:08,774 - ERROR - Unexpected error (batch 1400, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:20:13,775 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:13,776 - ERROR - Unexpected error (batch 1400, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:20:18,778 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:18,779 - ERROR - Unexpected error (batch 1450, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:20:23,783 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:23,784 - ERROR - Unexpected error (batch 1450, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:20:28,788 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:28,789 - ERROR - Unexpected error (batch 1450, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:20:33,793 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:33,794 - ERROR - Unexpected error (batch 1500, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:20:38,801 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:38,801 - ERROR - Unexpected error (batch 1500, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:20:43,807 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:43,807 - ERROR - Unexpected error (batch 1500, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:20:48,810 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:48,811 - ERROR - Unexpected error (batch 1550, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:20:53,816 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:53,817 - ERROR - Unexpected error (batch 1550, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:20:53,900 - INFO - Merged dataset saved to processed_data/spotify_history_combined.csv
+2025-03-14 01:20:58,823 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:20:58,824 - ERROR - Unexpected error (batch 1550, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:21:03,829 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:03,830 - ERROR - Unexpected error (batch 1600, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:21:08,835 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:08,835 - ERROR - Unexpected error (batch 1600, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:21:13,841 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:13,841 - ERROR - Unexpected error (batch 1600, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:21:18,846 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:18,846 - ERROR - Unexpected error (batch 1650, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:21:23,852 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:23,852 - ERROR - Unexpected error (batch 1650, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:21:28,858 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:28,858 - ERROR - Unexpected error (batch 1650, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:21:33,864 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:33,864 - ERROR - Unexpected error (batch 1700, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:21:38,869 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:38,870 - ERROR - Unexpected error (batch 1700, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:21:43,875 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:43,876 - ERROR - Unexpected error (batch 1700, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:21:48,880 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:48,881 - ERROR - Unexpected error (batch 1750, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:21:53,886 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:53,887 - ERROR - Unexpected error (batch 1750, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:21:58,893 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:21:58,893 - ERROR - Unexpected error (batch 1750, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:22:03,898 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:03,899 - ERROR - Unexpected error (batch 1800, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:22:08,900 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:08,901 - ERROR - Unexpected error (batch 1800, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:22:13,909 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:13,910 - ERROR - Unexpected error (batch 1800, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:22:18,915 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:18,916 - ERROR - Unexpected error (batch 1850, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:22:23,920 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:23,921 - ERROR - Unexpected error (batch 1850, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:22:28,927 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:28,927 - ERROR - Unexpected error (batch 1850, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:22:33,932 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:33,933 - ERROR - Unexpected error (batch 1900, attempt 1): [Errno 98] Address already in use
+2025-03-14 01:22:38,938 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:38,938 - ERROR - Unexpected error (batch 1900, attempt 2): [Errno 98] Address already in use
+2025-03-14 01:22:43,944 - INFO - User authentication requires interaction with your web browser. Once you enter your credentials and give authorization, you will be redirected to a url.  Paste that url you were directed to to complete the authorization.
+2025-03-14 01:22:43,944 - ERROR - Unexpected error (batch 1900, attempt 3): [Errno 98] Address already in use
+2025-03-14 01:23:03,493 - INFO - Merged dataset saved to processed_data/spotify_history_combined.csv
