@@ -53,3 +53,45 @@
 - **Authorization Flow:**
   - The manual URL handling for the authorization code flow is removed.
   - The code uses `SpotifyOAuth` with the PKCE flow for authentication.
+
+## Setting up Spotify Developer Credentials
+
+To use the Spotify API, you need to set up Spotify developer credentials. Follow these steps:
+
+1. **Create a Spotify Developer Account:**
+   - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
+   - Log in with your Spotify account or create a new one if you don't have an account.
+
+2. **Create a New Application:**
+   - Click on the "Create an App" button.
+   - Fill in the required details such as the app name and description.
+   - Click on the "Create" button.
+
+3. **Obtain Client ID and Client Secret:**
+   - After creating the application, you will be redirected to the app's dashboard.
+   - You will find the `Client ID` and `Client Secret` on this page. Copy these values.
+
+4. **Set Redirect URI:**
+   - In the app's dashboard, click on the "Edit Settings" button.
+   - In the "Redirect URIs" section, add the following URI: `http://127.0.0.1:9090/callback`.
+   - Click on the "Save" button.
+
+5. **Update the `.env` File:**
+   - Open the `.env` file in the repository.
+   - Replace the placeholders with your actual `Client ID` and `Redirect URI` values:
+     ```
+     SPOTIPY_CLIENT_ID=your_client_id
+     SPOTIPY_REDIRECT_URI=http://127.0.0.1:9090/callback
+     ```
+
+6. **Configure Environment Variables in GitHub Codespaces:**
+   - Open the `.devcontainer/devcontainer.json` file.
+   - Ensure that the environment variables are correctly referenced:
+     ```json
+     "remoteEnv": {
+         "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
+         "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
+     }
+     ```
+
+By following these steps, you will have successfully set up Spotify developer credentials and configured the environment to use the Spotify API.

@@ -21,8 +21,7 @@ logging.basicConfig(
 )
 
 # --- FILE PATH ---
-file_paths = ['spotify_history_part_1.csv', 'spotify_history_part_2.csv',
-              'spotify_history_part_3.csv', 'spotify_history_part_4.csv', 'spotify_history_part_5.csv']
+file_paths = ['cleaned_spotify_history.csv']
 
 # --- Authorization ---
 
