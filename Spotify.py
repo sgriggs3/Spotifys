@@ -5,15 +5,15 @@ from spotipy.oauth2 import SpotifyOAuth
 import pandas as pd
 import time
 import logging
-from dotenv import load_dotenv
 import socket
 import subprocess
 import platform
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Set up logging with file handler instead of redirecting stdout
+# Set up logging
 logging.basicConfig(
     filename='spotify_script_output.log',
     level=logging.INFO,
@@ -23,25 +23,21 @@ logging.basicConfig(
 # --- FILE PATH ---
 file_paths = ['cleaned_spotify_history.csv']
 
-# --- Authorization ---
-
+# --- Authentication ---
 
 def kill_port(port):
     """Kill process using the specified port"""
     if platform.system() == "Windows":
-        subprocess.run(
-            ['netstat', '-ano', '|', 'findstr', f':{port}'], shell=True)
-    else:
         try:
-            lsof_output = subprocess.run(
-                ['lsof', '-ti', f':{port}', '-sTCP:LISTEN', '-t'], capture_output=True, text=True, check=True)
-            pids = lsof_output.stdout.strip().split('\n')
-            for pid in pids:
-                if pid:  # Ensure pid is not empty
-                    subprocess.run(['kill', '-9', pid], check=True)
+            subprocess.run(['taskkill', '/f', '/im', 'node.exe'], check=True)
         except subprocess.CalledProcessError:
             pass
-
+    else:
+        try:
+            subprocess.run(['lsof', '-ti', f':{port}', '-sTCP:LISTEN', '-t'], check=True)
+            subprocess.run(['kill', '-9', f'$(lsof -ti:{port})'], shell=True)
+        except subprocess.CalledProcessError:
+            pass
 
 def find_free_port():
     """Find a free port to use"""
@@ -51,8 +47,8 @@ def find_free_port():
         port = s.getsockname()[1]
     return port
 
-
 def authenticate_spotify():
+    """Authenticate with Spotify API using environment variables"""
     client_id = os.environ.get('SPOTIPY_CLIENT_ID')
     client_secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
     redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
@@ -62,20 +58,34 @@ def authenticate_spotify():
         raise ValueError(
             "SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET and SPOTIPY_REDIRECT_URI environment variables must be set.")
 
+    # Find a free port or use the default
+    redirect_port = 9090
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind(('127.0.0.1', redirect_port))
+        sock.close()
+    except socket.error:
+        logging.warning(f"Port {redirect_port} is in use. Finding a free port...")
+        redirect_port = find_free_port()
+        redirect_uri = f'http://127.0.0.1:{redirect_port}/callback'
+        os.environ['SPOTIPY_REDIRECT_URI'] = redirect_uri
+
+    logging.info(f"Using redirect URI: {redirect_uri}")
+
     auth_manager = SpotifyOAuth(
         client_id=client_id,
         client_secret=client_secret,
-        redirect_uri=os.environ.get('SPOTIPY_REDIRECT_URI'),
-        scope="user-read-email user-read-private user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative"
+        redirect_uri=redirect_uri,
+        scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative",
+        open_browser=False
     )
 
-    sp = spotipy.Spotify(auth_manager=auth_manager)
-    return sp
+    return spotipy.Spotify(auth_manager=auth_manager)
 
 # --- Load CSV files ---
 
-
 def load_csv_files(file_paths):
+    """Load CSV files and return list of dataframes"""
     dataframes = []
     for file_path in file_paths:
         try:
@@ -85,11 +95,10 @@ def load_csv_files(file_paths):
             logging.error(f"File not found: {file_path}")
     return dataframes
 
-
 # --- Extract track IDs ---
 
-
 def get_track_ids_from_uris(track_uris):
+    """Extract track IDs from Spotify URIs"""
     track_ids = []
     for uri in track_uris:
         if pd.isna(uri):
@@ -103,14 +112,13 @@ def get_track_ids_from_uris(track_uris):
 
 # --- Fetch Audio Features ---
 
-
 def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5):
+    """Fetch audio features for track IDs with rate limiting and retries"""
     audio_features_list = []
     batch_start = 0
 
     while batch_start < len(track_ids):
-        batch_ids = [
-            id for id in track_ids[batch_start:batch_start + batch_size] if id]
+        batch_ids = [id for id in track_ids[batch_start:batch_start + batch_size] if id]
         if not batch_ids:
             batch_start += batch_size
             continue
@@ -127,8 +135,7 @@ def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5)
             except spotipy.SpotifyException as e:
                 if e.http_status == 429:  # Rate limit
                     wait_time = int(e.headers.get('Retry-After', retry_delay))
-                    logging.warning(
-                        f"Rate limit exceeded. Waiting {wait_time}s...")
+                    logging.warning(f"Rate limit exceeded. Waiting {wait_time}s...")
                     time.sleep(wait_time)
                 else:
                     logging.error(f"Spotify API error: {str(e)}")
@@ -146,8 +153,8 @@ def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5)
 
 # --- Process CSV files ---
 
-
 def process_csv_files(sp, dataframes):
+    """Process CSV files and add audio features"""
     for i, df in enumerate(dataframes):
         if 'spotify_track_uri' not in df.columns:
             logging.error(
@@ -164,11 +171,9 @@ def process_csv_files(sp, dataframes):
         df_with_audio_features.to_csv(output_file_path, index=False)
         logging.info(f"Data saved to {output_file_path}")
 
-
 def merge_processed_files():
     """Merge all processed CSV files into one combined dataset"""
-    processed_files = [f for f in os.listdir(
-        'processed_data') if f.endswith('_processed.csv')]
+    processed_files = [f for f in os.listdir('processed_data') if f.endswith('_processed.csv')]
     dfs = []
 
     for file in processed_files:
@@ -176,11 +181,8 @@ def merge_processed_files():
         dfs.append(df)
 
     combined_df = pd.concat(dfs, ignore_index=True)
-    combined_df.to_csv(
-        'processed_data/spotify_history_combined.csv', index=False)
-    logging.info(
-        "Merged dataset saved to processed_data/spotify_history_combined.csv")
-
+    combined_df.to_csv('processed_data/spotify_history_combined.csv', index=False)
+    logging.info("Merged dataset saved to processed_data/spotify_history_combined.csv")
 
 # --- Main Execution ---
 
@@ -189,42 +191,18 @@ def main():
         # Create processed_data directory if it doesn't exist
         os.makedirs('processed_data', exist_ok=True)
 
-        # Kill existing process on port 9090
-        kill_port(9090)
-
-        # Set redirect URI to port 9090
-        new_redirect_uri = 'http://127.0.0.1:9090/callback'
-        os.environ['SPOTIPY_REDIRECT_URI'] = new_redirect_uri
-
-        # Update .env file
-        env_updated = False
-        if os.path.exists('.env'):
-            with open('.env', 'r') as f:
-                env_lines = f.readlines()
-            with open('.env', 'w') as f:
-                for line in env_lines:
-                    if line.startswith('SPOTIPY_REDIRECT_URI='):
-                        f.write(f'SPOTIPY_REDIRECT_URI={new_redirect_uri}\n')
-                        env_updated = True
-                    else:
-                        f.write(line)
-                if not env_updated:
-                    f.write(f'\nSPOTIFY_REDIRECT_URI={new_redirect_uri}\n')
-
-        # Load environment variables
-        load_dotenv(override=True)
-
-        # Initialize Spotify client
-        logging.info("Authenticating with Spotify...")
-        sp = authenticate_spotify()
-
-        # Process data
+        # Load CSV files first
         logging.info("Loading CSV files...")
         dataframes = load_csv_files(file_paths)
         if not dataframes:
             logging.error("No data files were loaded successfully.")
             return
 
+        # Authenticate only if we have data to process
+        logging.info("Authenticating with Spotify...")
+        sp = authenticate_spotify()
+
+        # Process data
         logging.info("Processing CSV files...")
         process_csv_files(sp, dataframes)
 
@@ -236,7 +214,6 @@ def main():
     except Exception as e:
         logging.error(f"An error occurred: {str(e)}")
         raise
-
 
 if __name__ == "__main__":
     main()
