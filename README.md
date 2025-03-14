@@ -12,7 +12,7 @@
    - This file specifies the necessary Python libraries and extensions for VS Code.
 
 3. **Set Environment Variables:**
-   - The Spotify API credentials (client ID, client secret, and redirect URI) are stored as environment variables.
+   - The Spotify API credentials (client ID and redirect URI) are stored as environment variables.
    - You can set these environment variables in GitHub Codespaces using the `.devcontainer/devcontainer.json` file or by using GitHub secrets.
 
 4. **Install Dependencies:**
@@ -52,5 +52,4 @@
 
 - **Authorization Flow:**
   - The manual URL handling for the authorization code flow is removed.
-  - The code uses `SpotifyOAuth` with a local server or the PKCE flow for authentication.
-
+  - The code uses `SpotifyOAuth` with the PKCE flow for authentication.

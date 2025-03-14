@@ -26,18 +26,21 @@ file_paths = ['spotify_history_part_1.csv', 'spotify_history_part_2.csv',
 
 def authenticate_spotify():
     client_id = os.environ.get('SPOTIPY_CLIENT_ID')
-    client_secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
     redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
 
     # Ensure necessary environment variables are set
-    if not client_id or not client_secret or not redirect_uri:
+    if not client_id or not redirect_uri:
         raise ValueError(
-            "SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET and SPOTIPY_REDIRECT_URI environment variables must be set.")
+            "SPOTIPY_CLIENT_ID and SPOTIPY_REDIRECT_URI environment variables must be set.")
 
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
-                                                   client_secret=client_secret,
                                                    redirect_uri=redirect_uri,
-                                                   scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative"))
+                                                   scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative",
+                                                   open_browser=True,
+                                                   show_dialog=True,
+                                                   cache_path=".cache",
+                                                   requests_session=True,
+                                                   requests_timeout=10))
     return sp
 
 # --- Load CSV files ---
@@ -167,7 +170,7 @@ if __name__ == "__main__":
             key, value = line.strip().split("=", 1)
             os.environ[key] = value
 
-    #sp = authenticate_spotify()
+    sp = authenticate_spotify()
     dataframes = load_csv_files(file_paths)
-    #process_csv_files(sp, dataframes)
+    process_csv_files(sp, dataframes)
     merge_processed_files()
