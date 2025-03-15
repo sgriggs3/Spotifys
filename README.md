@@ -1,97 +1,188 @@
-# Spotifys
+# Spotify API Integration
 
-## Setting up the Environment in GitHub Codespaces
+This project provides a robust Python implementation for interacting with the Spotify API, featuring comprehensive error handling, retry mechanisms, and audio feature analysis.
 
-1. **Open the repository in GitHub Codespaces:**
-   - Navigate to your repository on GitHub.
-   - Click on the `Code` button and select `Open with Codespaces`.
-   - If you don't have a Codespace already, create a new one.
+## Setup Requirements
 
-2. **Configure the Dev Container:**
-   - The repository includes a `.devcontainer/devcontainer.json` file that sets up the development environment.
-   - This file specifies the necessary Python libraries and extensions for VS Code.
+### 1. Spotify Developer Account
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Create a new application
+3. Note down your `Client ID` and `Client Secret`
+4. Add a redirect URI (e.g., `http://localhost:8080`)
+5. Add it to the allowlist in your application settings
 
-3. **Set Environment Variables:**
-   - The Spotify API credentials (client ID and redirect URI) are stored as environment variables.
-   - You can set these environment variables in GitHub Codespaces using the `.devcontainer/devcontainer.json` file or by using GitHub secrets.
+### 2. Environment Variables
+Create a `.env` file in the project root with:
+```env
+SPOTIPY_CLIENT_ID=your_client_id_here
+SPOTIPY_CLIENT_SECRET=your_client_secret_here
+SPOTIPY_REDIRECT_URI=http://localhost:8080
+```
 
-4. **Install Dependencies:**
-   - The `postCreateCommand` in the `devcontainer.json` file ensures that all necessary Python libraries are installed using the `requirements.txt` file.
+### 3. Python Dependencies
+Install required packages:
+```bash
+pip install -r requirements.txt
+```
 
-## Running the Code
+## Core Components
 
-1. **Open the `Spotify.py` file:**
-   - This file contains the main code for fetching audio features from Spotify.
+### 1. Authentication (`authentication.py`)
+- Implements OAuth2 authentication flow
+- Handles token refresh automatically
+- Includes retry mechanisms for failed authentication
+- Provides manual authorization URL fallback
+- Custom port management for redirect URI
 
-2. **Run the Script:**
-   - You can run the script using the integrated terminal in VS Code.
-   - Use the debug configurations provided in the `.vscode/launch.json` file for easy debugging and running the script.
+### 2. Music API Client (`music_api_client.py`)
+- High-level interface for Spotify API operations
+- Comprehensive error handling
+- Rate limiting protection
+- Methods for:
+  - Fetching top tracks/artists
+  - Creating and managing playlists
+  - Getting recently played tracks
+  - Accessing user's saved tracks
+  - Retrieving audio features
 
-3. **Process the CSV Files:**
-   - The code is designed to process multiple CSV files (e.g., `spotify_history_part_1.csv`, `spotify_history_part_2.csv`, etc.).
-   - It extracts track IDs from the `spotify_track_uri` column and fetches audio features using the `spotipy` library.
-   - The processed data is saved to new CSV files in the `processed_data` directory.
+### 3. Audio Features Processing (`spotify_audio_features.py`)
+- Batch processing of audio features
+- Progress tracking
+- Automatic retry on failures
+- CSV file processing and merging
+- Custom error handling
 
-## Additional Information
+## Usage Examples
 
-- **Code Formatting:**
-  - The code is formatted according to PEP 8 standards using the `black` formatter.
-  - Recommended VS Code settings for Python development are included in the `.vscode/settings.json` file.
+### Basic Authentication
+```python
+from authentication import authenticate_spotify
 
-- **Error Handling and Logging:**
-  - The code includes improved error handling and logging using the `logging` module.
-  - Comments are added to explain the purpose of different code sections and variables.
+client_id = "your_client_id"
+client_secret = "your_client_secret"
+redirect_uri = "http://localhost:8080"
+scopes = "user-read-private user-read-email playlist-read-private"
 
-- **Refactoring:**
-  - The code is refactored into smaller, more manageable functions for better readability and maintainability.
-  - Functions include loading CSV files, authenticating with Spotify, processing a single CSV file, and saving the processed data.
+spotify_client = authenticate_spotify(client_id, client_secret, redirect_uri, scopes)
+```
 
-- **Performance Optimization:**
-  - The code is optimized for performance where possible, using efficient data structures and algorithms.
-  - It handles potential issues such as missing data, invalid track URIs, and Spotify API errors gracefully.
+### Using the Music API Client
+```python
+from music_api_client import MusicAPIClient
 
-- **Authorization Flow:**
-  - The manual URL handling for the authorization code flow is removed.
-  - The code uses `SpotifyOAuth` with the PKCE flow for authentication.
+client = MusicAPIClient(client_id, client_secret, redirect_uri, scopes)
 
-## Setting up Spotify Developer Credentials
+# Get user's top tracks
+top_tracks = client.get_top_tracks(limit=10)
 
-To use the Spotify API, you need to set up Spotify developer credentials. Follow these steps:
+# Create a playlist
+playlist_id = client.create_playlist(
+    user_id="your_user_id",
+    name="My Playlist",
+    description="Created with Spotify API"
+)
 
-1. **Create a Spotify Developer Account:**
-   - Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
-   - Log in with your Spotify account or create a new one if you don't have an account.
+# Add tracks to playlist
+track_ids = ["spotify:track:id1", "spotify:track:id2"]
+client.add_tracks_to_playlist(playlist_id, track_ids)
+```
 
-2. **Create a New Application:**
-   - Click on the "Create an App" button.
-   - Fill in the required details such as the app name and description.
-   - Click on the "Create" button.
+### Processing Audio Features
+```python
+from spotify_audio_features import SpotifyAudioFeatures
 
-3. **Obtain Client ID and Client Secret:**
-   - After creating the application, you will be redirected to the app's dashboard.
-   - You will find the `Client ID` and `Client Secret` on this page. Copy these values.
+# Initialize processor
+processor = SpotifyAudioFeatures(spotify_client)
 
-4. **Set Redirect URI:**
-   - In the app's dashboard, click on the "Edit Settings" button.
-   - In the "Redirect URIs" section, add the following URI: `http://127.0.0.1:9090/callback`.
-   - Click on the "Save" button.
+# Process a CSV file with track URIs
+processor.process_dataframe(
+    df=your_dataframe,
+    output_path="processed_data/output.csv"
+)
+```
 
-5. **Update the `.env` File:**
-   - Open the `.env` file in the repository.
-   - Replace the placeholders with your actual `Client ID` and `Redirect URI` values:
-     ```
-     SPOTIPY_CLIENT_ID=your_client_id
-     SPOTIPY_REDIRECT_URI=http://127.0.0.1:9090/callback
-     ```
+## Error Handling
 
-6. **Configure Environment Variables in GitHub Codespaces:**
-   - Open the `.devcontainer/devcontainer.json` file.
-   - Ensure that the environment variables are correctly referenced:
-     ```json
-     "remoteEnv": {
-         "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
-         "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
-     }
-     ```
+The implementation includes comprehensive error handling for:
+- Authentication failures
+- Rate limiting
+- Network issues
+- Invalid requests
+- Token expiration
+- Missing permissions
 
-By following these steps, you will have successfully set up Spotify developer credentials and configured the environment to use the Spotify API.
+Each component has custom exceptions and logging for better debugging:
+```python
+try:
+    client = MusicAPIClient(...)
+except SpotifyAPIError as e:
+    logging.error(f"API Error: {str(e)}")
+except Exception as e:
+    logging.error(f"Unexpected error: {str(e)}")
+```
+
+## Testing
+
+Run the test suite to verify functionality:
+```bash
+python -m unittest spotify_test.py
+```
+
+The test suite includes:
+- Authentication flow tests
+- Token refresh mechanism tests
+- API error handling tests
+- Audio features processing tests
+
+## Logging
+
+All components include detailed logging:
+- Authentication logs: `spotify_auth.log`
+- API operation logs: `spotify_api.log`
+- Audio features processing logs: `spotify_script_output.log`
+
+## Best Practices
+
+1. Token Management:
+   - Store refresh tokens securely
+   - Implement automatic token refresh
+   - Handle expired tokens gracefully
+
+2. Rate Limiting:
+   - Implement exponential backoff
+   - Respect Spotify's rate limits
+   - Handle 429 responses appropriately
+
+3. Error Handling:
+   - Use custom exceptions for different error types
+   - Implement retry mechanisms with backoff
+   - Provide detailed error messages and logging
+
+## Common Issues and Solutions
+
+1. Authentication Failures:
+   - Verify client credentials are correct
+   - Ensure redirect URI matches Spotify dashboard
+   - Check required scopes are properly configured
+
+2. Rate Limiting:
+   - Implement proper delays between requests
+   - Use batch processing for multiple operations
+   - Handle 429 responses with appropriate waiting periods
+
+3. Permission Issues:
+   - Verify all required scopes are requested
+   - Check user authorization status
+   - Ensure token has required permissions
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

@@ -1,0 +1,32 @@
+# MCP Spotify Server Installation Steps
+
+1.  Create the directory for the new MCP server:
+    `mkdir -p /home/vscode/Documents/Goodloops\ Dev/MCP/github.com/pashpashpash`
+2.  Clone the repository:
+    `git clone https://github.com/pashpashpash/mcp-spotify.git /home/vscode/Documents/Goodloops\ Dev/MCP/github.com/pashpashpash/mcp-spotify`
+3.  Install Node.js using nvm:
+    \`\`\`
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    export NVM_DIR="/usr/local/share/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+    nvm install --lts
+    \`\`\`
+4.  Build the project:
+    `cd /home/vscode/Documents/Goodloops\ Dev/MCP/github.com/pashpashpash/mcp-spotify && npm ci && npm run build`
+5.  Configure the MCP server:
+    -   Add the following configuration to \`/home/vscode/.vscode-remote/data/User/globalStorage/goodloops.goodloops-dev/settings/cline\_mcp\_settings.json\`:
+
+    \`\`\`json
+    "github.com/pashpashpash/mcp-spotify": {
+      "command": "node",
+      "args": ["/home/vscode/Documents/Goodloops Dev/MCP/github.com/pashpashpash/mcp-spotify/dist/index.js"],
+      "env": {
+        "SPOTIFY_CLIENT_ID": "YOUR_SPOTIFY_CLIENT_ID",
+        "SPOTIFY_CLIENT_SECRET": "YOUR_SPOTIFY_CLIENT_SECRET"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+    \`\`\`
+    - Replace `YOUR_SPOTIFY_CLIENT_ID` and `YOUR_SPOTIFY_CLIENT_SECRET` with your actual Spotify Client ID and Client Secret.

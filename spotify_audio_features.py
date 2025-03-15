@@ -1,193 +1,179 @@
 import os
 import sys
 import spotipy
-from spotipy.oauth2 import SpotifyOAuth
+from spotipy.exceptions import SpotifyException
 import pandas as pd
 import time
 import logging
 import socket
 import subprocess
 import platform
+from typing import List, Optional, Dict, Any, Callable
+from datetime import datetime
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Set up logging with file handler instead of redirecting stdout
+# Set up logging with both file and console handlers
 logging.basicConfig(
-    filename='spotify_script_output.log',
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('spotify_api.log'),
+        logging.StreamHandler()
+    ]
 )
 
-# --- FILE PATH ---
-file_paths = ['cleaned_spotify_history.csv']
+class SpotifyAudioFeaturesError(Exception):
+    """Custom exception for audio features processing errors"""
+    pass
 
-# --- Authentication ---
+class RateLimitException(Exception):
+    """Custom exception for rate limit errors"""
+    def __init__(self, wait_time: int):
+        self.wait_time = wait_time
+        super().__init__(f"Rate limit exceeded. Wait time: {wait_time}s")
 
-def kill_port(port):
-    """Kill process using the specified port"""
-    if platform.system() == "Windows":
-        try:
-            subprocess.run(['taskkill', '/f', '/im', 'node.exe'], check=True)
-        except subprocess.CalledProcessError:
-            pass
-    else:
-        try:
-            subprocess.run(['lsof', '-ti', f':{port}', '-sTCP:LISTEN', '-t'], check=True)
-            subprocess.run(['kill', '-9', f'$(lsof -ti:{port})'], shell=True)
-        except subprocess.CalledProcessError:
-            pass
+class AudioFeatureValidator:
+    """Validates audio feature responses"""
+    
+    REQUIRED_FEATURES = {
+        'danceability', 'energy', 'key', 'loudness', 'mode',
+        'speechiness', 'acousticness', 'instrumentalness',
+        'liveness', 'valence', 'tempo', 'duration_ms'
+    }
+    
+    @staticmethod
+    def validate_features(features: Dict[str, Any]) -> bool:
+        """Validate audio features response"""
+        if not features:
+            return False
+            
+        return all(
+            feature in features and features[feature] is not None
+            for feature in AudioFeatureValidator.REQUIRED_FEATURES
+        )
 
-def find_free_port():
-    """Find a free port to use"""
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind(('', 0))
-        s.listen(1)
-        port = s.getsockname()[1]
-    return port
-
-def authenticate_spotify():
-    client_id = os.environ.get('SPOTIPY_CLIENT_ID')
-    redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
-
-    # Ensure necessary environment variables are set
-    if not client_id or not redirect_uri:
-        raise ValueError(
-            "SPOTIPY_CLIENT_ID and SPOTIPY_REDIRECT_URI environment variables must be set.")
-
-    # Find a free port or use the default
-    redirect_port = 9090
-    # Check if the default port is in use, if so, find a free one
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind(('127.0.0.1', redirect_port))
-        sock.close()
-    except socket.error as e:
-        logging.warning(f"Port {redirect_port} is in use. Trying to find a free port.")
-        redirect_port = find_free_port()
-        redirect_uri = f'http://127.0.0.1:{redirect_port}/callback'
-        os.environ['SPOTIPY_REDIRECT_URI'] = redirect_uri  # Update the environment variable
-
-    logging.info(f"Using redirect URI: {redirect_uri}")
-
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
-                                                   redirect_uri=redirect_uri,
-                                                   scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative",
-                                                   open_browser=False,  # Prevent automatic browser opening
-                                                   ))
-    return sp
-
-
-# --- Load CSV files ---
-def load_csv_files(file_paths):
-    dataframes = []
-    for file_path in file_paths:
-        try:
-            df = pd.read_csv(file_path, low_memory=False)
-            dataframes.append(df)
-        except FileNotFoundError:
-            logging.error(f"File not found: {file_path}")
-    return dataframes
-
-
-# --- Extract track IDs ---
-def get_track_ids_from_uris(track_uris):
-    track_ids = []
-    for uri in track_uris:
-        if pd.isna(uri):
-            track_ids.append(None)
-        else:
+class SpotifyAudioFeatures:
+    """Handles Spotify audio features processing with improved error handling and efficiency"""
+    
+    def __init__(self, sp: spotipy.Spotify, batch_size: int = 50):
+        self.sp = sp
+        self.retry_delay = 5
+        self.max_retries = 3
+        self.batch_size = min(batch_size, 100)  # Spotify API limit is 100
+        self.validator = AudioFeatureValidator()
+        
+    def get_track_ids_from_uris(self, track_uris: List[str]) -> List[Optional[str]]:
+        """Extract track IDs from Spotify URIs with validation"""
+        track_ids = []
+        for uri in track_uris:
             try:
-                track_ids.append(uri.split(':')[-1])
-            except (AttributeError, IndexError):
-                track_ids.append(None)
-    return track_ids
-
-
-# --- Fetch Audio Features ---
-def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5):
-    audio_features_list = []
-    batch_start = 0
-
-    while batch_start < len(track_ids):
-        batch_ids = [id for id in track_ids[batch_start:batch_start + batch_size] if id]
-        if not batch_ids:
-            batch_start += batch_size
-            continue
-
-        success = False
-        for attempt in range(retries):
-            try:
-                features_batch = sp.audio_features(tracks=batch_ids)
-                if features_batch:
-                    audio_features_list.extend(features_batch)
-                    success = True
-                    break
-
-            except spotipy.SpotifyException as e:
-                if e.http_status == 429:  # Rate limit
-                    wait_time = int(e.headers.get('Retry-After', retry_delay))
-                    logging.warning(f"Rate limit exceeded. Waiting {wait_time}s...")
-                    time.sleep(wait_time)
+                if pd.isna(uri):
+                    track_ids.append(None)
+                    continue
+                    
+                # Handle both URI and ID formats
+                if uri.startswith('spotify:track:'):
+                    track_id = uri.split(':')[-1]
                 else:
-                    logging.error(f"Spotify API error: {str(e)}")
-                    time.sleep(retry_delay)
-            except Exception as e:
-                logging.error(f"Unexpected error: {str(e)}")
-                time.sleep(retry_delay)
+                    track_id = uri
+                    
+                # Validate track ID format
+                if not isinstance(track_id, str) or len(track_id) != 22:
+                    logging.warning(f"Invalid track ID format: {track_id}")
+                    track_ids.append(None)
+                else:
+                    track_ids.append(track_id)
+                    
+            except (AttributeError, IndexError) as e:
+                logging.warning(f"Could not extract track ID from URI: {uri} - {str(e)}")
+                track_ids.append(None)
+                
+        return track_ids
 
-        if not success:
-            audio_features_list.extend([None] * len(batch_ids))
+    def fetch_audio_features(
+        self,
+        track_ids: List[str],
+        progress_callback: Optional[Callable[[float], None]] = None
+    ) -> List[Optional[Dict[str, Any]]]:
+        """
+        Fetch audio features for tracks
+        
+        Args:
+            track_ids: List of Spotify track IDs
+            progress_callback: Optional callback function for progress updates
+            
+        Returns:
+            List of audio features dictionaries or None for failed requests
+        """
+        audio_features_list = []
+        batch_start = 0
+        total_tracks = len(track_ids)
+        
+        while batch_start < total_tracks:
+            # Get valid track IDs for current batch
+            batch_ids = [id for id in track_ids[batch_start:batch_start + self.batch_size] if id]
+            
+            if not batch_ids:
+                batch_start += self.batch_size
+                continue
+                
+            features_batch = None
+            success = False
+            retry_count = 0
+            
+            while not success and retry_count < self.max_retries:
+                try:
+                    features_batch = self.sp.audio_features(batch_ids)
+                    
+                    # Validate features
+                    if features_batch and all(
+                        not f or self.validator.validate_features(f)
+                        for f in features_batch
+                    ):
+                        success = True
+                    else:
+                        raise SpotifyAudioFeaturesError("Invalid audio features response")
+                        
+                except SpotifyException as e:
+                    if e.http_status == 429:  # Rate limit
+                        wait_time = int(e.headers.get('Retry-After', self.retry_delay))
+                        logging.warning(f"Rate limit exceeded. Waiting {wait_time}s...")
+                        time.sleep(wait_time)
+                    else:
+                        retry_count += 1
+                        if retry_count == self.max_retries:
+                            logging.error(f"Spotify API error: {str(e)}")
+                            raise SpotifyAudioFeaturesError(f"Failed to fetch audio features: {str(e)}")
+                        time.sleep(self.retry_delay * retry_count)
+                        
+                except Exception as e:
+                    retry_count += 1
+                    if retry_count == self.max_retries:
+                        logging.error(f"Unexpected error: {str(e)}")
+                        raise SpotifyAudioFeaturesError(f"Unexpected error: {str(e)}")
+                    time.sleep(self.retry_delay * retry_count)
+            
+            # Add results or None for failed batch
+            if success and features_batch:
+                audio_features_list.extend(features_batch)
+            else:
+                audio_features_list.extend([None] * len(batch_ids))
+            
+            # Update progress
+            if progress_callback:
+                progress = min((batch_start + self.batch_size) / total_tracks * 100, 100)
+                progress_callback(progress)
+                
+            batch_start += self.batch_size
+            
+        return audio_features_list
 
-        batch_start += batch_size
-
-    return audio_features_list
-
-
-# --- Process CSV files ---
-def process_csv_files(sp, dataframes):
-    for i, df in enumerate(dataframes):
-        if 'spotify_track_uri' not in df.columns:
-            logging.error(
-                f"'spotify_track_uri' column is missing in file {file_paths[i]}. Cannot add audio features.")
-            continue
-
-        df['track_id'] = get_track_ids_from_uris(df['spotify_track_uri'])
-        audio_features = fetch_audio_features(sp, df['track_id'].tolist())
-        audio_features_df = pd.DataFrame(audio_features)
-        df_with_audio_features = pd.concat([df, audio_features_df], axis=1)
-
-        output_file_path = f'processed_data/spotify_history_part_{i + 1}_processed.csv'
-        os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
-        df_with_audio_features.to_csv(output_file_path, index=False)
-        logging.info(f"Data saved to {output_file_path}")
-
-
-def merge_processed_files():
-    """Merge all processed CSV files into one combined dataset"""
-    processed_files = [f for f in os.listdir('processed_data') if f.endswith('_processed.csv')]
-    dfs = []
-
-    for file in processed_files:
-        df = pd.read_csv(f'processed_data/{file}', low_memory=False)
-        dfs.append(df)
-
-    combined_df = pd.concat(dfs, ignore_index=True)
-    combined_df.to_csv('processed_data/spotify_history_combined.csv', index=False)
-    logging.info("Merged dataset saved to processed_data/spotify_history_combined.csv")
-
-
-# --- Main Execution ---
-if __name__ == "__main__":
-    try:
-        #sp = authenticate_spotify()
-        dataframes = load_csv_files(file_paths)
-        if dataframes:
-            sp = authenticate_spotify()  # Authenticate only if there are dataframes to process
-            process_csv_files(sp, dataframes)
-        merge_processed_files()
-
-    except Exception as e:
-        logging.error(f"An error occurred during execution: {e}")
-        print(f"An error occurred during execution: {e}")
+    def process_dataframe(
+        self,
+        df: pd.DataFrame,
+        output_path: str,
+        chunk_size: Optional[int] = None
+    ) -> None:
