@@ -78,9 +78,10 @@ To use the Spotify API, you need to set up Spotify developer credentials. Follow
 
 5. **Update the `.env` File:**
    - Open the `.env` file in the repository.
-   - Replace the placeholders with your actual `Client ID` and `Redirect URI` values:
+   - Replace the placeholders with your actual `Client ID`, `Client Secret`, and `Redirect URI` values:
      ```
      SPOTIPY_CLIENT_ID=your_client_id
+     SPOTIPY_CLIENT_SECRET=your_client_secret
      SPOTIPY_REDIRECT_URI=http://127.0.0.1:9090/callback
      ```
 
@@ -90,6 +91,7 @@ To use the Spotify API, you need to set up Spotify developer credentials. Follow
      ```json
      "remoteEnv": {
          "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
+         "SPOTIPY_CLIENT_SECRET": "${localEnv:SPOTIPY_CLIENT_SECRET}",
          "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
      }
      ```
