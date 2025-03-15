@@ -1,0 +1,59 @@
+# MCP Server Tool Installation for AgentDeskAI/browser-tools-mcp
+
+This file contains instructions for installing the MCP server tool for AgentDeskAI/browser-tools-mcp.
+
+## Prerequisites
+
+- Node.js and npm installed
+
+## Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone https://github.com/AgentDeskAI/browser-tools-mcp
+    ```
+
+2.  Navigate to the cloned directory:
+
+    ```bash
+    cd browser-tools-mcp
+    ```
+
+3.  Install the dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4.  Build the project:
+
+    ```bash
+    npm run build
+    ```
+
+5.  Configure the MCP server in your MCP settings file (e.g., `~/.vscode-remote/data/User/globalStorage/goodloops.goodloops-dev/settings/cline_mcp_settings.json`):
+
+    ```json
+    {
+      "mcpServers": {
+        "agentdeskai": {
+          "command": "node",
+          "args": ["/path/to/browser-tools-mcp/build/index.js"],
+          "env": {
+            // Add any required environment variables here
+          },
+          "disabled": false,
+          "autoApprove": []
+        }
+      }
+    }
+    ```
+
+    **Note:** Replace `/path/to/browser-tools-mcp` with the actual path to the cloned repository.
+
+6.  Restart your MCP server or VS Code to apply the changes.
+
+## Usage
+
+Once installed, you can use the AgentDeskAI browser tools through the MCP interface.

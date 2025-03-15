@@ -1,0 +1,59 @@
+# MCP Server Tool Installation for browsertool and browserbase
+
+This file contains instructions for installing the MCP server tool for browsertool and browserbase.
+
+## Prerequisites
+
+- Node.js and npm installed
+
+## Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone https://github.com/browserbase/mcp-server-browserbase
+    ```
+
+2.  Navigate to the cloned directory:
+
+    ```bash
+    cd mcp-server-browserbase
+    ```
+
+3.  Install the dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4.  Build the project:
+
+    ```bash
+    npm run build
+    ```
+
+5.  Configure the MCP server in your MCP settings file (e.g., `~/.vscode-remote/data/User/globalStorage/goodloops.goodloops-dev/settings/cline_mcp_settings.json`):
+
+    ```json
+    {
+      "mcpServers": {
+        "browserbase": {
+          "command": "node",
+          "args": ["/path/to/mcp-server-browserbase/build/index.js"],
+          "env": {
+            // Add any required environment variables here
+          },
+          "disabled": false,
+          "autoApprove": []
+        }
+      }
+    }
+    ```
+
+    **Note:** Replace `/path/to/mcp-server-browserbase` with the actual path to the cloned repository.
+
+6.  Restart your MCP server or VS Code to apply the changes.
+
+## Usage
+
+Once installed, you can use the browsertool and browserbase tools through the MCP interface.

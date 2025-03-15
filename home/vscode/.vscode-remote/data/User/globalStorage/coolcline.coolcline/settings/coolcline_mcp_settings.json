@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "github.com/pashpashpash/mcp-spotify": {
+      "command": "node",
+      "args": ["/home/vscode/Documents/CoolCline/MCP/github.com/pashpashpash/mcp-spotify/dist/index.js"],
+      "env": {
+        "SPOTIFY_CLIENT_ID": "dcc2df507bde447c93a0199358ca219d",
+        "SPOTIFY_CLIENT_SECRET": "128089720b414d1e8233290d94fb38a0"
+      },
+      "disabled": false,
+      "alwaysAllow": []
+    }
+  }
+}

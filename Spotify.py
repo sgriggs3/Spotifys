@@ -6,6 +6,7 @@ import pandas as pd
 import time
 import logging
 from dotenv import load_dotenv
+from spotify_mcp_client import SpotifyMCPClient
 
 # Load environment variables
 load_dotenv()
@@ -101,8 +102,18 @@ def get_track_ids_from_uris(track_uris):
 # --- Fetch Audio Features ---
 
 
-def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5):
-    """Fetch audio features for track IDs with rate limiting and retries"""
+def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5, use_mcp=True):
+    """Fetch audio features for track IDs with optional MCP support"""
+    if use_mcp:
+        try:
+            mcp_client = SpotifyMCPClient(batch_size=batch_size)
+            return mcp_client.get_audio_features(track_ids)
+        except Exception as e:
+            logging.error(f"MCP fetch failed, falling back to traditional method: {str(e)}")
+            # Fall back to traditional method if MCP fails
+            return fetch_audio_features(sp, track_ids, batch_size, retries, retry_delay, use_mcp=False)
+    
+    # Traditional spotipy method
     audio_features_list = []
     batch_start = 0
 
@@ -145,8 +156,8 @@ def fetch_audio_features(sp, track_ids, batch_size=50, retries=3, retry_delay=5)
 # --- Process CSV files ---
 
 
-def process_csv_files(sp, dataframes):
-    """Process CSV files and add audio features"""
+def process_csv_files(sp, dataframes, use_mcp=True):
+    """Process CSV files and add audio features with optional MCP support"""
     for i, df in enumerate(dataframes):
         if 'spotify_track_uri' not in df.columns:
             logging.error(
@@ -154,7 +165,7 @@ def process_csv_files(sp, dataframes):
             continue
 
         df['track_id'] = get_track_ids_from_uris(df['spotify_track_uri'])
-        audio_features = fetch_audio_features(sp, df['track_id'].tolist())
+        audio_features = fetch_audio_features(sp, df['track_id'].tolist(), use_mcp=use_mcp)
         audio_features_df = pd.DataFrame(audio_features)
         df_with_audio_features = pd.concat([df, audio_features_df], axis=1)
 
@@ -209,9 +220,9 @@ def main():
             logging.error("No data files were loaded successfully.")
             return
 
-        # Process data
+        # Process data using MCP by default
         logging.info("Processing CSV files...")
-        process_csv_files(sp, dataframes)
+        process_csv_files(sp, dataframes, use_mcp=True)
 
         logging.info("Merging processed files...")
         merge_processed_files()

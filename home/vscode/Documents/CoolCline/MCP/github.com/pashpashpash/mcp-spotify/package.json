@@ -1,0 +1,20 @@
+{
+  "name": "mcp-spotify",
+  "version": "0.1.0",
+  "description": "MCP server for Spotify API with audio features support",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.1.0",
+    "spotify-web-api-node": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/spotify-web-api-node": "^5.0.11",
+    "typescript": "^5.3.3"
+  }
+}
