@@ -1,1 +1,2 @@
 runs-on: [self-hosted, linux, ARM64]
+on: workflow_dispatch
