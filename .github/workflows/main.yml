@@ -2,10 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches-ignore:
-      - main # Ignore pushes to the main branch
-    # Optionally, target specific branches if needed:
-    # branches:
+    branches:
         - codespace-humble-rotary-phone-69975ggv667vhrvv
     #   - feature/**
 
