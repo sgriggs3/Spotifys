@@ -13,5 +13,9 @@
     "remoteEnv": {
         "SPOTIPY_CLIENT_ID": "${localEnv:SPOTIPY_CLIENT_ID}",
         "SPOTIPY_REDIRECT_URI": "${localEnv:SPOTIPY_REDIRECT_URI}"
+    },
+    "tasks": {
+      "build": "pip install -r requirements.txt",
+      "launch": "python Spotify.py"
     }
 }

@@ -13,10 +13,10 @@ class MusicAPIClient:
             redirect_uri (str): Redirect URI set in the Spotify Developer Dashboard
             scopes (str): Scopes for the Spotify API access
         """
-        self.sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
-                                                            client_secret=client_secret,
-                                                            redirect_uri=redirect_uri,
-                                                            scope=scopes,
+        self.sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.getenv('SPOTIPY_CLIENT_ID'),
+                                                            client_secret=os.getenv('SPOTIPY_CLIENT_SECRET'),
+                                                            redirect_uri=os.getenv('SPOTIPY_REDIRECT_URI'),
+                                                            scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing streaming user-library-modify user-read-email user-read-private",
                                                             cache_path="spotify_token_cache",
                                                             show_dialog=True))
 
@@ -76,11 +76,10 @@ class MusicAPIClient:
 
 if __name__ == "__main__":
     # Example usage
-    client_id = "6a8af75e08324ff3a05dc2194eec8657"
-    client_secret = "f6c805ec2970419cbe3fcb79d733dc71"
-    redirect_uri = 'http://localhost:8080'
-    scopes = "user-read-private,user-read-email,playlist-read-private,playlist-modify-public,user-top-read"
+    client_id = os.getenv('SPOTIPY_CLIENT_ID')
+    client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
+    redirect_uri = os.getenv('SPOTIPY_REDIRECT_URI')
+    scopes = "user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing streaming user-library-modify user-read-email user-read-private"
 
     music_client = MusicAPIClient(client_id, client_secret, redirect_uri, scopes)
     print("Spotify client initialized. Ready to fetch top tracks and manage playlists.")
-

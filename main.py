@@ -1,4 +1,3 @@
-
 import os
 from dotenv import load_dotenv
 import spotipy
@@ -13,10 +12,10 @@ load_dotenv()
 def initialize_spotify_client():
     # Use SpotifyOAuth for user authentication and authorization
     spotify_client = spotipy.Spotify(auth_manager=SpotifyOAuth(
-        client_id=os.getenv('SPOTIFY_CLIENT_ID'),
-        client_secret=os.getenv('SPOTIFY_CLIENT_SECRET'),
-        redirect_uri=os.getenv('SPOTIFY_REDIRECT_URI'),
-        scope="user-library-read user-top-read playlist-modify-public playlist-modify-private"
+        client_id=os.getenv('SPOTIPY_CLIENT_ID'),
+        client_secret=os.getenv('SPOTIPY_CLIENT_SECRET'),
+        redirect_uri=os.getenv('SPOTIPY_REDIRECT_URI'),
+        scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing streaming user-library-modify user-read-email user-read-private"
     ))
     return spotify_client
 

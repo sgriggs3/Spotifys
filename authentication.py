@@ -2,25 +2,24 @@
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+import os
+from dotenv import load_dotenv
 
-def authenticate_spotify(client_id, client_secret, redirect_uri, scopes):
+# Load environment variables from .env file
+load_dotenv()
+
+def authenticate_spotify():
     """
     Authenticate with the Spotify API using OAuth.
-
-    Parameters:
-        client_id (str): Spotify Application client ID
-        client_secret (str): Spotify Application client secret
-        redirect_uri (str): Redirect URI set in the Spotify Developer Dashboard
-        scopes (str): A string of scopes separated by commas
 
     Returns:
         Spotify client object for accessing the Spotify API
     """
     auth_manager = SpotifyOAuth(
-        client_id=client_id,
-        client_secret=client_secret,
-        redirect_uri=redirect_uri,
-        scope=scopes,
+        client_id=os.getenv('SPOTIPY_CLIENT_ID'),
+        client_secret=os.getenv('SPOTIPY_CLIENT_SECRET'),
+        redirect_uri=os.getenv('SPOTIPY_REDIRECT_URI'),
+        scope="user-read-recently-played user-library-read user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-currently-playing streaming user-library-modify user-read-email user-read-private",
         show_dialog=True,
         cache_path="token_cache"
     )
@@ -28,12 +27,6 @@ def authenticate_spotify(client_id, client_secret, redirect_uri, scopes):
     return sp
 
 if __name__ == "__main__":
-    # Using the credentials from the 'env.txt' file
-    client_id = "6a8af75e08324ff3a05dc2194eec8657"
-    client_secret = "f6c805ec2970419cbe3fcb79d733dc71"
-    redirect_uri = 'http://localhost:8080'
-    scopes = "user-read-playback-state,user-modify-playback-state,user-read-currently-playing,playlist-read-private,playlist-read-collaborative,playlist-modify-private,playlist-modify-public,user-read-recently-played,user-library-read,streaming,user-top-read,user-read-recently-played,user-library-modify,user-read-email"
-
     # Authenticate and get the Spotify client
-    spotify_client = authenticate_spotify(client_id, client_secret, redirect_uri, scopes)
+    spotify_client = authenticate_spotify()
     print("Successfully authenticated with Spotify")
